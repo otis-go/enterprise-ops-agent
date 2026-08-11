@@ -1,0 +1,142 @@
+# Interactions — logged touchpoints that have already happened.
+#
+# occurred_at is always at or before the reference time. The most recent
+# interaction per customer is what drives "how long since we last talked":
+#   CUST-001 -> 2026-08-03  (8 days)
+#   CUST-002 -> 2026-08-05  (6 days)
+#   CUST-003 -> 2026-07-30  (12 days)
+#   CUST-004 -> 2026-08-06  (5 days)
+#   CUST-005 -> 2026-08-04  (7 days)
+#   CUST-006 -> 2026-07-22  (20 days)
+#   CUST-007 -> 2026-07-28  (14 days)
+#   CUST-008 -> 2026-08-09  (2 days)
+
+- interaction_id: "INT-001"
+  customer_id: "CUST-001"
+  opportunity_id: "OPP-001"
+  channel: "meeting"
+  occurred_at: "2026-07-20T10:00:00+08:00"
+  duration_minutes: 90
+  participants_internal: ["rep_li_wei"]
+  participants_customer: ["周敏", "王海涛"]
+  summary: "在恒泰精密工厂进行 MES 集成需求调研。客户现有三条产线，工单数据仍靠人工汇总，希望首期先打通工单下发与报工回传。周敏确认预算归属生产制造部，本财年可动用额度约 30 万元。"
+
+- interaction_id: "INT-002"
+  customer_id: "CUST-001"
+  opportunity_id: "OPP-001"
+  channel: "call"
+  occurred_at: "2026-08-03T15:00:00+08:00"
+  duration_minutes: 45
+  participants_internal: ["rep_li_wei"]
+  participants_customer: ["周敏"]
+  summary: "电话讲解一期方案。客户对功能范围没有异议，但要求把实施服务与License拆开报价，并补充三年运维费用明细。我方承诺在 8 月 11 日前提交更新后的报价明细。"
+
+- interaction_id: "INT-003"
+  customer_id: "CUST-002"
+  opportunity_id: "OPP-002"
+  channel: "meeting"
+  occurred_at: "2026-08-05T14:00:00+08:00"
+  duration_minutes: 120
+  participants_internal: ["rep_li_wei", "rep_chen_hao"]
+  participants_customer: ["李国强", "王倩"]
+  summary: "现场演示全渠道订单中台。重点演示了门店与线上库存合池、超卖拦截。客户信息部认可产品能力，提出需要进一步确认商务条款与实施周期，后续以邮件沟通。"
+
+- interaction_id: "INT-004"
+  customer_id: "CUST-003"
+  opportunity_id: "OPP-003"
+  channel: "meeting"
+  occurred_at: "2026-07-10T10:30:00+08:00"
+  duration_minutes: 120
+  participants_internal: ["rep_li_wei", "rep_chen_hao"]
+  participants_customer: ["陈曦", "刘楠"]
+  summary: "风控数据平台技术方案评审。客户技术团队通过了架构与性能指标评审，确认进入商务阶段，目标在 8 月 20 日前完成签约以配合其季度上线计划。"
+
+- interaction_id: "INT-005"
+  customer_id: "CUST-003"
+  opportunity_id: "OPP-003"
+  channel: "call"
+  occurred_at: "2026-07-30T14:00:00+08:00"
+  duration_minutes: 60
+  participants_internal: ["rep_li_wei"]
+  participants_customer: ["陈曦"]
+  summary: "商务谈判电话。双方就总价基本达成一致，剩余分歧集中在付款节奏与服务等级违约条款。陈曦表示需要法务出具正式意见后才能推进用印流程，未给出明确回复时间。"
+
+- interaction_id: "INT-006"
+  customer_id: "CUST-004"
+  opportunity_id: "OPP-004"
+  channel: "meeting"
+  occurred_at: "2026-08-06T14:00:00+08:00"
+  duration_minutes: 90
+  participants_internal: ["rep_li_wei"]
+  participants_customer: ["吴静", "林嘉"]
+  summary: "设备台账系统方案初审。客户运营与质量部门共同参加，确认了资产盘点与校准提醒两个核心场景。双方约定在 8 月 12 日召开方案终审会，由吴静召集决策层参加。"
+
+- interaction_id: "INT-007"
+  customer_id: "CUST-005"
+  opportunity_id: "OPP-005"
+  channel: "meeting"
+  occurred_at: "2026-07-15T10:00:00+08:00"
+  duration_minutes: 90
+  participants_internal: ["rep_li_wei"]
+  participants_customer: ["赵鹏"]
+  summary: "仓配调度优化方案沟通。客户对排线算法效果满意，但提到集团正在收紧本年度信息化投入，最终立项需要等待集团预算复核结果。"
+
+- interaction_id: "INT-008"
+  customer_id: "CUST-005"
+  opportunity_id: "OPP-005"
+  channel: "call"
+  occurred_at: "2026-08-04T10:30:00+08:00"
+  duration_minutes: 30
+  participants_internal: ["rep_li_wei"]
+  participants_customer: ["赵鹏"]
+  summary: "赵鹏来电告知集团已取消本年度该项目预算，项目不再立项，建议明年一季度重新评估。我方确认关闭该商机，双方约定保持常规联系。"
+
+- interaction_id: "INT-009"
+  customer_id: "CUST-006"
+  opportunity_id: null
+  channel: "call"
+  occurred_at: "2026-06-18T15:00:00+08:00"
+  duration_minutes: 30
+  participants_internal: ["rep_li_wei"]
+  participants_customer: ["孙立"]
+  summary: "例行季度沟通。瑞方智能当前使用情况平稳，活跃账号数较上季度略有增长，暂无新增需求，孙立提到年底可能会评估扩容。"
+
+- interaction_id: "INT-010"
+  customer_id: "CUST-006"
+  opportunity_id: null
+  channel: "meeting"
+  occurred_at: "2026-07-22T14:00:00+08:00"
+  duration_minutes: 60
+  participants_internal: ["rep_li_wei"]
+  participants_customer: ["孙立"]
+  summary: "季度使用回顾会。回顾了上半年的使用数据与两次故障处理记录，客户整体满意。会上未涉及合同续约安排，孙立未提及续约决策流程与时间表。"
+
+- interaction_id: "INT-011"
+  customer_id: "CUST-007"
+  opportunity_id: null
+  channel: "call"
+  occurred_at: "2026-07-28T11:00:00+08:00"
+  duration_minutes: 30
+  participants_internal: ["rep_li_wei"]
+  participants_customer: ["何雅"]
+  summary: "月度沟通电话。广盛食品已在华东六个区域仓完成推广，何雅反馈门店端使用频率在上升，希望后续能在补货提醒环节做更细的配置。"
+
+- interaction_id: "INT-012"
+  customer_id: "CUST-008"
+  opportunity_id: null
+  channel: "call"
+  occurred_at: "2026-07-28T15:30:00+08:00"
+  duration_minutes: 30
+  participants_internal: ["rep_li_wei"]
+  participants_customer: ["郑涛"]
+  summary: "月度例行电话。北岸建材使用情况正常，无待处理问题，郑涛确认按原计划在 8 月上旬做一次季度业务回顾。"
+
+- interaction_id: "INT-013"
+  customer_id: "CUST-008"
+  opportunity_id: null
+  channel: "meeting"
+  occurred_at: "2026-08-09T10:00:00+08:00"
+  duration_minutes: 90
+  participants_internal: ["rep_li_wei", "rep_zhang_min"]
+  participants_customer: ["郑涛", "许敏"]
+  summary: "季度业务回顾会。回顾了近三个月的采购单据处理量与系统可用性指标，均达成约定水平。客户无遗留问题，双方约定下一次回顾在 11 月进行。"

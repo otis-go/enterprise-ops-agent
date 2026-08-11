@@ -1,0 +1,245 @@
+# E-mails — business facts only.
+#
+# Direction is carried entirely by `status`: received = inbound,
+# sent / draft = outbound. There is no `direction` field.
+#
+# created_at is when the record entered our system:
+#   sent      -> created_at <= sent_at  (drafted, then sent)
+#   received  -> created_at >= sent_at  (customer sent it, then we recorded it)
+#   draft     -> sent_at is null
+#
+# Unanswered inbound mail in this dataset is exactly EMAIL-004 and EMAIL-014.
+# Every other received message has a later `sent` reply in the same thread.
+
+# --- CUST-001 / THREAD-001 -------------------------------------------------
+- email_id: "EMAIL-001"
+  thread_id: "THREAD-001"
+  customer_id: "CUST-001"
+  opportunity_id: "OPP-001"
+  status: "received"
+  from_address: "zhou.min@hengtai-precision.com"
+  to_addresses: ["li.wei@lingce-tech.com"]
+  cc_addresses: []
+  subject: "关于一期方案报价的补充要求"
+  body: "李经理，今天电话里提到的两点请一并处理：一是把 License 与实施服务分开列示，二是补充三年运维费用明细。我们内部评审需要用到这份材料，麻烦下周二之前给我。周敏"
+  created_at: "2026-08-03T16:12:00+08:00"
+  sent_at: "2026-08-03T16:10:00+08:00"
+  in_reply_to: null
+
+- email_id: "EMAIL-002"
+  thread_id: "THREAD-001"
+  customer_id: "CUST-001"
+  opportunity_id: "OPP-001"
+  status: "sent"
+  from_address: "li.wei@lingce-tech.com"
+  to_addresses: ["zhou.min@hengtai-precision.com"]
+  cc_addresses: []
+  subject: "回复：关于一期方案报价的补充要求"
+  body: "周总监，收到，两点要求都已记录。报价拆分与三年运维明细我会在 8 月 11 日前整理好发给您。如果评审会时间有变动请随时告知。李伟"
+  created_at: "2026-08-03T18:05:00+08:00"
+  sent_at: "2026-08-03T18:20:00+08:00"
+  in_reply_to: "EMAIL-001"
+
+# --- CUST-002 / THREAD-002: unanswered inbound, with a draft that does NOT count
+- email_id: "EMAIL-003"
+  thread_id: "THREAD-002"
+  customer_id: "CUST-002"
+  opportunity_id: "OPP-002"
+  status: "sent"
+  from_address: "li.wei@lingce-tech.com"
+  to_addresses: ["li.guoqiang@mingyuan-retail.com"]
+  cc_addresses: ["chen.hao@lingce-tech.com"]
+  subject: "全渠道订单中台演示材料与后续安排"
+  body: "李经理，附上今天演示用到的材料以及库存合池的配置说明。商务条款与实施周期部分我们内部再确认一下，有进展第一时间同步给您。李伟"
+  created_at: "2026-08-05T17:20:00+08:00"
+  sent_at: "2026-08-05T17:40:00+08:00"
+  in_reply_to: null
+
+- email_id: "EMAIL-004"
+  thread_id: "THREAD-002"
+  customer_id: "CUST-002"
+  opportunity_id: "OPP-002"
+  status: "received"
+  from_address: "li.guoqiang@mingyuan-retail.com"
+  to_addresses: ["li.wei@lingce-tech.com"]
+  cc_addresses: []
+  subject: "回复：全渠道订单中台演示材料与后续安排"
+  body: "李伟你好，材料收到。我们这边评审前需要明确三点：一是整体实施周期能否压缩到十周以内，二是能否接受按三期付款，三是验收标准如何界定。麻烦给一份书面答复。李国强"
+  created_at: "2026-08-10T10:17:00+08:00"
+  sent_at: "2026-08-10T10:15:00+08:00"
+  in_reply_to: "EMAIL-003"
+
+# Drafted but never sent — the customer is still waiting.
+- email_id: "EMAIL-005"
+  thread_id: "THREAD-002"
+  customer_id: "CUST-002"
+  opportunity_id: "OPP-002"
+  status: "draft"
+  from_address: "li.wei@lingce-tech.com"
+  to_addresses: ["li.guoqiang@mingyuan-retail.com"]
+  cc_addresses: []
+  subject: "回复：全渠道订单中台演示材料与后续安排"
+  body: "李经理，关于您提出的三个问题，实施周期部分我先确认交付团队排期，付款方式和验收标准需要商务同事一起确认后再答复。（待补充具体条款，尚未发送）"
+  created_at: "2026-08-10T20:30:00+08:00"
+  sent_at: null
+  in_reply_to: "EMAIL-004"
+
+# --- CUST-003 / THREAD-003 -------------------------------------------------
+- email_id: "EMAIL-006"
+  thread_id: "THREAD-003"
+  customer_id: "CUST-003"
+  opportunity_id: "OPP-003"
+  status: "received"
+  from_address: "chen.xi@yunhui-fintech.com"
+  to_addresses: ["li.wei@lingce-tech.com"]
+  cc_addresses: []
+  subject: "合同条款的法务问题清单"
+  body: "李伟，附件是我们法务初步整理的问题清单，主要集中在付款节奏和服务等级违约责任两块。正式意见还需要走内部流程，时间我目前没法给准。陈曦"
+  created_at: "2026-07-30T15:03:00+08:00"
+  sent_at: "2026-07-30T15:00:00+08:00"
+  in_reply_to: null
+
+- email_id: "EMAIL-007"
+  thread_id: "THREAD-003"
+  customer_id: "CUST-003"
+  opportunity_id: "OPP-003"
+  status: "sent"
+  from_address: "li.wei@lingce-tech.com"
+  to_addresses: ["chen.xi@yunhui-fintech.com"]
+  cc_addresses: []
+  subject: "回复：合同条款的法务问题清单"
+  body: "陈总，清单已收到，我们法务会逐条回应。考虑到 8 月 20 日的上线目标，如果贵司法务意见需要更长时间，建议先安排双方法务直接对齐一次。李伟"
+  created_at: "2026-07-30T18:40:00+08:00"
+  sent_at: "2026-07-30T19:10:00+08:00"
+  in_reply_to: "EMAIL-006"
+
+# --- CUST-004 / THREAD-004 -------------------------------------------------
+- email_id: "EMAIL-008"
+  thread_id: "THREAD-004"
+  customer_id: "CUST-004"
+  opportunity_id: "OPP-004"
+  status: "received"
+  from_address: "wu.jing@kanghe-medical.com"
+  to_addresses: ["li.wei@lingce-tech.com"]
+  cc_addresses: []
+  subject: "方案终审会时间确认"
+  body: "李伟你好，终审会我这边定在 8 月 12 日下午两点，决策层三位同事都会参加，会议室已经安排好。请准备好演示与报价材料。吴静"
+  created_at: "2026-08-06T17:22:00+08:00"
+  sent_at: "2026-08-06T17:20:00+08:00"
+  in_reply_to: null
+
+- email_id: "EMAIL-009"
+  thread_id: "THREAD-004"
+  customer_id: "CUST-004"
+  opportunity_id: "OPP-004"
+  status: "sent"
+  from_address: "li.wei@lingce-tech.com"
+  to_addresses: ["wu.jing@kanghe-medical.com"]
+  cc_addresses: ["chen.hao@lingce-tech.com"]
+  subject: "回复：方案终审会时间确认"
+  body: "吴总，时间已确认，8 月 12 日下午两点我和技术同事一起到场。演示脚本、实施排期与报价单我们会提前准备好，会前一天发您预览版。李伟"
+  created_at: "2026-08-06T18:50:00+08:00"
+  sent_at: "2026-08-06T19:05:00+08:00"
+  in_reply_to: "EMAIL-008"
+
+# --- CUST-005 / THREAD-005 -------------------------------------------------
+- email_id: "EMAIL-010"
+  thread_id: "THREAD-005"
+  customer_id: "CUST-005"
+  opportunity_id: "OPP-005"
+  status: "received"
+  from_address: "zhao.peng@xinghai-logistics.com"
+  to_addresses: ["li.wei@lingce-tech.com"]
+  cc_addresses: []
+  subject: "关于仓配调度项目暂停的说明"
+  body: "李伟你好，正式通知一下：集团已取消本年度该项目预算，项目不再立项。这次不是方案的问题，建议明年一季度预算下来后我们重新评估。赵鹏"
+  created_at: "2026-08-04T11:02:00+08:00"
+  sent_at: "2026-08-04T11:00:00+08:00"
+  in_reply_to: null
+
+- email_id: "EMAIL-011"
+  thread_id: "THREAD-005"
+  customer_id: "CUST-005"
+  opportunity_id: "OPP-005"
+  status: "sent"
+  from_address: "li.wei@lingce-tech.com"
+  to_addresses: ["zhao.peng@xinghai-logistics.com"]
+  cc_addresses: []
+  subject: "回复：关于仓配调度项目暂停的说明"
+  body: "赵总监，理解，感谢一直以来的推动。我们会把这次的方案与测算结果留档，明年一季度我再主动联系您。期间如果有临时需求随时找我。李伟"
+  created_at: "2026-08-04T15:10:00+08:00"
+  sent_at: "2026-08-04T15:30:00+08:00"
+  in_reply_to: "EMAIL-010"
+
+# --- CUST-006 / THREAD-006: no renewal conversation started ---------------
+- email_id: "EMAIL-012"
+  thread_id: "THREAD-006"
+  customer_id: "CUST-006"
+  opportunity_id: null
+  status: "sent"
+  from_address: "li.wei@lingce-tech.com"
+  to_addresses: ["sun.li@ruifang-tech.com"]
+  cc_addresses: []
+  subject: "季度使用回顾会纪要"
+  body: "孙总监，附上今天回顾会的纪要与上半年使用数据附表。两次故障的处理记录也一并附上，如有需要补充的内容请告知。李伟"
+  created_at: "2026-07-22T16:40:00+08:00"
+  sent_at: "2026-07-22T17:00:00+08:00"
+  in_reply_to: null
+
+# --- CUST-007 / THREAD-007: unanswered product question -------------------
+- email_id: "EMAIL-013"
+  thread_id: "THREAD-007"
+  customer_id: "CUST-007"
+  opportunity_id: null
+  status: "sent"
+  from_address: "li.wei@lingce-tech.com"
+  to_addresses: ["he.ya@guangsheng-foods.com"]
+  cc_addresses: []
+  subject: "7 月使用情况月报"
+  body: "何经理，附上 7 月的使用情况月报，六个区域仓的门店端活跃度都有提升。补货提醒相关的使用数据我单独做了一页，供您参考。李伟"
+  created_at: "2026-08-03T09:45:00+08:00"
+  sent_at: "2026-08-03T10:00:00+08:00"
+  in_reply_to: null
+
+- email_id: "EMAIL-014"
+  thread_id: "THREAD-007"
+  customer_id: "CUST-007"
+  opportunity_id: null
+  status: "received"
+  from_address: "he.ya@guangsheng-foods.com"
+  to_addresses: ["li.wei@lingce-tech.com"]
+  cc_addresses: []
+  subject: "回复：7 月使用情况月报 —— 补货预警阈值的问题"
+  body: "李伟你好，月报收到。有个产品功能上的问题想确认：补货预警阈值目前只能按品类统一设置，我们能不能按单个门店分别设置不同阈值，并且把这些阈值批量导出核对？这个我们内部推广时会被反复问到，麻烦确认一下。何雅"
+  created_at: "2026-08-10T09:42:00+08:00"
+  sent_at: "2026-08-10T09:40:00+08:00"
+  in_reply_to: "EMAIL-013"
+
+# --- CUST-008 / THREAD-008: healthy, answered same day --------------------
+- email_id: "EMAIL-015"
+  thread_id: "THREAD-008"
+  customer_id: "CUST-008"
+  opportunity_id: null
+  status: "received"
+  from_address: "zheng.tao@beian-materials.com"
+  to_addresses: ["li.wei@lingce-tech.com"]
+  cc_addresses: []
+  subject: "回顾会后想补一份指标附表"
+  body: "李伟你好，今天回顾会讲的单据处理量和可用性指标，能不能把原始数据的附表也发我一份？我这边要放进部门月度汇报里。郑涛"
+  created_at: "2026-08-09T16:22:00+08:00"
+  sent_at: "2026-08-09T16:20:00+08:00"
+  in_reply_to: null
+
+- email_id: "EMAIL-016"
+  thread_id: "THREAD-008"
+  customer_id: "CUST-008"
+  opportunity_id: null
+  status: "sent"
+  from_address: "li.wei@lingce-tech.com"
+  to_addresses: ["zheng.tao@beian-materials.com"]
+  cc_addresses: ["zhang.min@lingce-tech.com"]
+  subject: "回复：回顾会后想补一份指标附表"
+  body: "郑经理，附上会议纪要和指标原始数据附表，里面按月拆分了单据处理量与系统可用性。汇报时如果需要口径说明我可以再补一段文字。李伟"
+  created_at: "2026-08-09T17:45:00+08:00"
+  sent_at: "2026-08-09T18:00:00+08:00"
+  in_reply_to: "EMAIL-015"

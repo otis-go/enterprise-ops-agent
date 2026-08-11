@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+
+# Runtime artifacts are always rebuildable from data/golden/ — never commit them.
+data/runtime/*
+!data/runtime/.gitkeep
+
+# Per-developer Claude Code permission grants — machine-specific, churns every
+# session. A shared .claude/settings.json would still be tracked.
+.claude/settings.local.json

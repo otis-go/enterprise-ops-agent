@@ -1,0 +1,93 @@
+# Expected behaviour for G001-G008.
+#
+# THIS FILE IS NOT PART OF THE BUSINESS ENVIRONMENT.
+# It holds evaluation expectations and must never be loaded by src/eoa/ or
+# written into any runtime store. data/golden/*.yaml holds facts; this holds
+# answers. tests/test_business_rules.py asserts that separation.
+#
+# Fields:
+#   case_id             G001-G008
+#   title               one-line human summary
+#   anchor_customer     the customer the case is about
+#   anchor_opportunity  the opportunity, or null when the case has none
+#   should_prioritize   whether this customer belongs in a "needs attention" list
+#   expected_signals    named reasons; each one is asserted structurally
+#   must_not            actions that would be wrong for this case
+
+- case_id: "G001"
+  title: "Proposal 阶段，跟进任务今天到期，且已 8 天未联系"
+  anchor_customer: "CUST-001"
+  anchor_opportunity: "OPP-001"
+  should_prioritize: true
+  expected_signals:
+    - "due_today_task"
+    - "no_contact_8d"
+  must_not: []
+
+- case_id: "G002"
+  title: "客户昨天来信，至今没有发出回复（只有草稿）"
+  anchor_customer: "CUST-002"
+  anchor_opportunity: "OPP-002"
+  should_prioritize: true
+  expected_signals:
+    - "unanswered_inbound"
+  must_not: []
+
+- case_id: "G003"
+  title: "大额 Negotiation 商机，12 天没有推进"
+  anchor_customer: "CUST-003"
+  anchor_opportunity: "OPP-003"
+  should_prioritize: true
+  expected_signals:
+    - "high_value_opportunity"
+    - "no_progress_12d"
+  must_not: []
+
+- case_id: "G004"
+  title: "Proposal 阶段，但两天内已有安排好的会议"
+  anchor_customer: "CUST-004"
+  anchor_opportunity: "OPP-004"
+  should_prioritize: true
+  expected_signals:
+    - "meeting_already_scheduled"
+  must_not:
+    - "schedule_meeting"
+
+- case_id: "G005"
+  title: "商机已丢单，原因是预算取消"
+  anchor_customer: "CUST-005"
+  anchor_opportunity: "OPP-005"
+  should_prioritize: false
+  expected_signals:
+    - "opportunity_lost"
+  must_not:
+    - "routine_follow_up"
+
+- case_id: "G006"
+  title: "存量客户合同 20 天后到期，尚未安排续约会议"
+  anchor_customer: "CUST-006"
+  anchor_opportunity: null
+  should_prioritize: true
+  expected_signals:
+    - "contract_expiring_soon"
+    - "no_renewal_meeting"
+  must_not: []
+
+- case_id: "G007"
+  title: "客户昨天提出产品功能问题，尚未回复"
+  anchor_customer: "CUST-007"
+  anchor_opportunity: null
+  should_prioritize: true
+  expected_signals:
+    - "unanswered_inbound"
+    - "product_question"
+  must_not: []
+
+- case_id: "G008"
+  title: "沟通正常的健康客户，不应被判为高优先级"
+  anchor_customer: "CUST-008"
+  anchor_opportunity: null
+  should_prioritize: false
+  expected_signals: []
+  must_not:
+    - "flag_as_high_priority"

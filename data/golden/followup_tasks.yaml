@@ -1,0 +1,85 @@
+# Follow-up tasks — business facts only.
+#
+# "Overdue" and "due today" are never stored; both are derived from due_date
+# against meta.reference_time (see eoa.derive).
+#
+# CUST-006 and CUST-007 have no task on purpose: for those two the scenario is
+# precisely that nothing has been captured yet.
+
+# Due exactly on the reference date (2026-08-11) — due today, not overdue.
+- task_id: "TASK-001"
+  customer_id: "CUST-001"
+  opportunity_id: "OPP-001"
+  title: "提交更新后的报价明细"
+  description: "按客户要求拆分 License 与实施服务报价，并补充三年运维费用明细，发送给周敏。"
+  owner: "rep_li_wei"
+  due_date: "2026-08-11"
+  status: "open"
+  created_at: "2026-08-03T18:30:00+08:00"
+  completed_at: null
+
+- task_id: "TASK-002"
+  customer_id: "CUST-002"
+  opportunity_id: "OPP-002"
+  title: "回复明远零售的商务条款问题"
+  description: "针对客户 8 月 10 日邮件提出的实施周期、分期付款与验收标准三个问题给出书面答复。"
+  owner: "rep_li_wei"
+  due_date: "2026-08-13"
+  status: "open"
+  created_at: "2026-08-10T11:00:00+08:00"
+  completed_at: null
+
+- task_id: "TASK-003"
+  customer_id: "CUST-003"
+  opportunity_id: "OPP-003"
+  title: "跟进云汇金融法务条款反馈"
+  description: "等待客户法务对付款节奏与服务等级违约条款出具意见，必要时安排双方法务直接沟通。"
+  owner: "rep_li_wei"
+  due_date: "2026-08-14"
+  status: "open"
+  created_at: "2026-07-30T19:30:00+08:00"
+  completed_at: null
+
+- task_id: "TASK-004"
+  customer_id: "CUST-004"
+  opportunity_id: "OPP-004"
+  title: "准备康和医疗方案终审会材料"
+  description: "整理资产盘点与校准提醒两个场景的演示脚本、实施排期与报价单，供 8 月 12 日终审会使用。"
+  owner: "rep_li_wei"
+  due_date: "2026-08-12"
+  status: "in_progress"
+  created_at: "2026-08-06T19:20:00+08:00"
+  completed_at: null
+
+- task_id: "TASK-005"
+  customer_id: "CUST-005"
+  opportunity_id: "OPP-005"
+  title: "归档星海物流丢单原因"
+  description: "在系统中关闭商机并记录丢单原因，纳入明年一季度重新评估名单。"
+  owner: "rep_li_wei"
+  due_date: "2026-08-06"
+  status: "done"
+  created_at: "2026-08-04T16:00:00+08:00"
+  completed_at: "2026-08-05T10:00:00+08:00"
+
+- task_id: "TASK-006"
+  customer_id: "CUST-008"
+  opportunity_id: null
+  title: "发送季度业务回顾会议纪要"
+  description: "整理 8 月 9 日回顾会纪要与指标附表，发送给郑涛及许敏。"
+  owner: "rep_li_wei"
+  due_date: "2026-08-10"
+  status: "done"
+  created_at: "2026-08-09T17:00:00+08:00"
+  completed_at: "2026-08-09T18:05:00+08:00"
+
+- task_id: "TASK-007"
+  customer_id: "CUST-008"
+  opportunity_id: null
+  title: "准备北岸建材下季度扩容建议"
+  description: "根据近三个月单据处理量增长趋势，评估是否需要在 11 月回顾会上提出扩容建议。"
+  owner: "rep_li_wei"
+  due_date: "2026-09-04"
+  status: "open"
+  created_at: "2026-08-09T18:10:00+08:00"
+  completed_at: null

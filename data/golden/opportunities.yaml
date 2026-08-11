@@ -1,0 +1,67 @@
+# Opportunities — business facts only.
+#
+# CUST-006, CUST-007 and CUST-008 deliberately have no opportunity: for those
+# customers the point of the scenario is that no sales motion is under way.
+
+- opportunity_id: "OPP-001"
+  customer_id: "CUST-001"
+  name: "恒泰精密 MES 集成一期"
+  stage: "proposal"
+  amount_cny: 280000
+  expected_close_date: "2026-08-28"
+  actual_close_date: null
+  lost_reason: null
+  owner_rep: "rep_li_wei"
+  created_at: "2026-06-18T10:00:00+08:00"
+  updated_at: "2026-08-03T18:30:00+08:00"
+
+- opportunity_id: "OPP-002"
+  customer_id: "CUST-002"
+  name: "明远零售全渠道订单中台"
+  stage: "demo"
+  amount_cny: 360000
+  expected_close_date: "2026-09-30"
+  actual_close_date: null
+  lost_reason: null
+  owner_rep: "rep_li_wei"
+  created_at: "2026-07-06T09:40:00+08:00"
+  updated_at: "2026-08-10T11:00:00+08:00"
+
+# Large deal in final-stage negotiation, untouched since 2026-07-30.
+- opportunity_id: "OPP-003"
+  customer_id: "CUST-003"
+  name: "云汇金融风控数据平台"
+  stage: "negotiation"
+  amount_cny: 500000
+  expected_close_date: "2026-08-20"
+  actual_close_date: null
+  lost_reason: null
+  owner_rep: "rep_li_wei"
+  created_at: "2026-05-08T15:00:00+08:00"
+  updated_at: "2026-07-30T19:30:00+08:00"
+
+- opportunity_id: "OPP-004"
+  customer_id: "CUST-004"
+  name: "康和医疗设备台账系统"
+  stage: "proposal"
+  amount_cny: 220000
+  expected_close_date: "2026-09-15"
+  actual_close_date: null
+  lost_reason: null
+  owner_rep: "rep_li_wei"
+  created_at: "2026-07-01T14:00:00+08:00"
+  updated_at: "2026-08-06T19:20:00+08:00"
+
+# Lost. The reason is a structured field, not something to be inferred from
+# interaction text.
+- opportunity_id: "OPP-005"
+  customer_id: "CUST-005"
+  name: "星海物流仓配调度优化"
+  stage: "lost"
+  amount_cny: 180000
+  expected_close_date: "2026-07-31"
+  actual_close_date: "2026-08-04"
+  lost_reason: "budget_cancelled"
+  owner_rep: "rep_li_wei"
+  created_at: "2026-05-25T10:00:00+08:00"
+  updated_at: "2026-08-04T16:00:00+08:00"

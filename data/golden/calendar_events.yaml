@@ -1,0 +1,107 @@
+# Calendar events — business facts only.
+#
+# This is the one entity that spans both sides of the reference time.
+#   status = completed -> end_at   <= reference_time
+#   status = scheduled -> start_at >  reference_time
+#
+# EVT-005 is the ONLY scheduled event in the dataset. CUST-006 in particular
+# has no scheduled event at all — that absence is the point of its scenario.
+
+- event_id: "EVT-001"
+  title: "恒泰精密 MES 集成需求调研"
+  customer_id: "CUST-001"
+  opportunity_id: "OPP-001"
+  start_at: "2026-07-20T10:00:00+08:00"
+  end_at: "2026-07-20T11:30:00+08:00"
+  location: "上海市松江区恒泰精密二号厂区会议室"
+  attendees_internal: ["rep_li_wei"]
+  attendees_customer: ["周敏", "王海涛"]
+  status: "completed"
+
+- event_id: "EVT-002"
+  title: "恒泰精密一期方案讲解"
+  customer_id: "CUST-001"
+  opportunity_id: "OPP-001"
+  start_at: "2026-08-03T15:00:00+08:00"
+  end_at: "2026-08-03T15:45:00+08:00"
+  location: "线上会议"
+  attendees_internal: ["rep_li_wei"]
+  attendees_customer: ["周敏"]
+  status: "completed"
+
+- event_id: "EVT-003"
+  title: "明远零售全渠道订单中台演示"
+  customer_id: "CUST-002"
+  opportunity_id: "OPP-002"
+  start_at: "2026-08-05T14:00:00+08:00"
+  end_at: "2026-08-05T16:00:00+08:00"
+  location: "杭州市明远零售总部 12 层会议室"
+  attendees_internal: ["rep_li_wei", "rep_chen_hao"]
+  attendees_customer: ["李国强", "王倩"]
+  status: "completed"
+
+- event_id: "EVT-004"
+  title: "云汇金融风控数据平台技术方案评审"
+  customer_id: "CUST-003"
+  opportunity_id: "OPP-003"
+  start_at: "2026-07-10T10:30:00+08:00"
+  end_at: "2026-07-10T12:30:00+08:00"
+  location: "线上会议"
+  attendees_internal: ["rep_li_wei", "rep_chen_hao"]
+  attendees_customer: ["陈曦", "刘楠"]
+  status: "completed"
+
+- event_id: "EVT-005"
+  title: "康和医疗设备台账系统方案终审会"
+  customer_id: "CUST-004"
+  opportunity_id: "OPP-004"
+  start_at: "2026-08-12T14:00:00+08:00"
+  end_at: "2026-08-12T15:30:00+08:00"
+  location: "苏州市康和医疗总部一号会议室"
+  attendees_internal: ["rep_li_wei", "rep_chen_hao"]
+  attendees_customer: ["吴静", "林嘉"]
+  status: "scheduled"
+
+- event_id: "EVT-006"
+  title: "康和医疗设备台账系统方案初审"
+  customer_id: "CUST-004"
+  opportunity_id: "OPP-004"
+  start_at: "2026-08-06T14:00:00+08:00"
+  end_at: "2026-08-06T15:30:00+08:00"
+  location: "苏州市康和医疗总部三号会议室"
+  attendees_internal: ["rep_li_wei"]
+  attendees_customer: ["吴静", "林嘉"]
+  status: "completed"
+
+- event_id: "EVT-007"
+  title: "星海物流仓配调度优化方案沟通"
+  customer_id: "CUST-005"
+  opportunity_id: "OPP-005"
+  start_at: "2026-07-15T10:00:00+08:00"
+  end_at: "2026-07-15T11:30:00+08:00"
+  location: "宁波市星海物流园区办公楼"
+  attendees_internal: ["rep_li_wei"]
+  attendees_customer: ["赵鹏"]
+  status: "completed"
+
+- event_id: "EVT-008"
+  title: "瑞方智能季度使用回顾会"
+  customer_id: "CUST-006"
+  opportunity_id: null
+  start_at: "2026-07-22T14:00:00+08:00"
+  end_at: "2026-07-22T15:00:00+08:00"
+  location: "线上会议"
+  attendees_internal: ["rep_li_wei"]
+  attendees_customer: ["孙立"]
+  status: "completed"
+
+- event_id: "EVT-009"
+  title: "北岸建材季度业务回顾会"
+  customer_id: "CUST-008"
+  opportunity_id: null
+  start_at: "2026-08-09T10:00:00+08:00"
+  end_at: "2026-08-09T11:30:00+08:00"
+  location: "线上会议"
+  attendees_internal: ["rep_li_wei", "rep_zhang_min"]
+  attendees_customer: ["郑涛", "许敏"]
+  status: "completed"

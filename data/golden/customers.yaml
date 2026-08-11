@@ -1,0 +1,91 @@
+# Customers — business facts only.
+#
+# All eight are owned by rep_li_wei (meta.current_user) so that no golden case
+# can silently drop out of scope if a later prioritisation step filters by
+# owner. Other reps appear as meeting participants instead.
+#
+# All timestamps are quoted so they stay strings in YAML and keep their +08:00
+# offset. Do not unquote them.
+
+- customer_id: "CUST-001"
+  name: "恒泰精密制造有限公司"
+  lifecycle_status: "prospect"
+  contract_end_date: null
+  owner_rep: "rep_li_wei"
+  primary_contact_name: "周敏"
+  primary_contact_title: "采购总监"
+  primary_contact_email: "zhou.min@hengtai-precision.com"
+  created_at: "2026-06-10T09:30:00+08:00"
+
+- customer_id: "CUST-002"
+  name: "明远零售集团股份有限公司"
+  lifecycle_status: "prospect"
+  contract_end_date: null
+  owner_rep: "rep_li_wei"
+  primary_contact_name: "李国强"
+  primary_contact_title: "信息化负责人"
+  primary_contact_email: "li.guoqiang@mingyuan-retail.com"
+  created_at: "2026-07-02T10:00:00+08:00"
+
+- customer_id: "CUST-003"
+  name: "云汇金融科技有限公司"
+  lifecycle_status: "prospect"
+  contract_end_date: null
+  owner_rep: "rep_li_wei"
+  primary_contact_name: "陈曦"
+  primary_contact_title: "首席技术官"
+  primary_contact_email: "chen.xi@yunhui-fintech.com"
+  created_at: "2026-04-22T14:00:00+08:00"
+
+- customer_id: "CUST-004"
+  name: "康和医疗器械有限公司"
+  lifecycle_status: "prospect"
+  contract_end_date: null
+  owner_rep: "rep_li_wei"
+  primary_contact_name: "吴静"
+  primary_contact_title: "运营副总裁"
+  primary_contact_email: "wu.jing@kanghe-medical.com"
+  created_at: "2026-06-28T11:00:00+08:00"
+
+- customer_id: "CUST-005"
+  name: "星海物流服务有限公司"
+  lifecycle_status: "prospect"
+  contract_end_date: null
+  owner_rep: "rep_li_wei"
+  primary_contact_name: "赵鹏"
+  primary_contact_title: "供应链总监"
+  primary_contact_email: "zhao.peng@xinghai-logistics.com"
+  created_at: "2026-05-19T09:00:00+08:00"
+
+# Contract expires 2026-08-31, i.e. 20 days after the reference date.
+- customer_id: "CUST-006"
+  name: "瑞方智能科技有限公司"
+  lifecycle_status: "customer"
+  contract_end_date: "2026-08-31"
+  owner_rep: "rep_li_wei"
+  primary_contact_name: "孙立"
+  primary_contact_title: "IT 总监"
+  primary_contact_email: "sun.li@ruifang-tech.com"
+  created_at: "2025-07-15T09:00:00+08:00"
+
+# An active customer with no recorded contract end date — the nullable branch
+# of the lifecycle rule.
+- customer_id: "CUST-007"
+  name: "广盛食品集团有限公司"
+  lifecycle_status: "customer"
+  contract_end_date: null
+  owner_rep: "rep_li_wei"
+  primary_contact_name: "何雅"
+  primary_contact_title: "数字化经理"
+  primary_contact_email: "he.ya@guangsheng-foods.com"
+  created_at: "2025-11-03T10:00:00+08:00"
+
+- customer_id: "CUST-008"
+  name: "北岸建材科技有限公司"
+  lifecycle_status: "customer"
+  contract_end_date: "2027-03-31"
+  owner_rep: "rep_li_wei"
+  primary_contact_name: "郑涛"
+  primary_contact_title: "采购经理"
+  primary_contact_email: "zheng.tao@beian-materials.com"
+  created_at: "2025-03-12T09:00:00+08:00"

@@ -1,0 +1,8 @@
+# Normalize every text file to LF, both in the repository and on checkout.
+# Keeps Windows / WSL / Linux / Docker / CI working trees byte-identical, so
+# diffs stay clean regardless of where the file was edited.
+#
+# `text=auto` lets git detect binary content itself, so binaries are never
+# rewritten. This attribute also overrides a developer's global
+# core.autocrlf setting for this repository.
+* text=auto eol=lf
