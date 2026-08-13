@@ -1,6 +1,6 @@
 """Enterprise Ops Agent — synthetic business environment.
 
-Phase 0B scope: schema, golden data loading, derived predicates, validation.
+Phase 0C-1 scope: schema, runtime YAML loading, derived predicates, validation.
 No agent, LLM, tool calling, RAG, embedding, memory, web UI or SQLite.
 """
 

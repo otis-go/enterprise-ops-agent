@@ -168,8 +168,8 @@ def test_records_are_immutable(model):
 # --------------------------------------------------------------------------- #
 
 
-def test_all_six_golden_files_load(dataset: Dataset):
-    assert len(dataset.customers) == 8
+def test_all_six_runtime_entity_types_load(dataset: Dataset):
+    assert len(dataset.customers) == 24
     assert dataset.opportunities
     assert dataset.interactions
     assert dataset.followup_tasks

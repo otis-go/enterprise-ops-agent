@@ -2,18 +2,24 @@
 
 Synthetic business environment for an enterprise sales-ops agent.
 
-**Current phase: 0B — data model and golden data only.**
-No agent, LLM, tool calling, RAG, embedding, memory, web UI, background
-customers or SQLite. Those are later phases.
+**Current phase: 0C-1 — Golden Data plus 16 Background Customers.**
+No agent, LLM, tool calling, RAG, embedding, memory, web UI or SQLite.
 
 ## What exists
 
 ```
 data/
 ├── meta.yaml                 environment facts (reference time, timezone, current user, reps)
-└── golden/
-    ├── README.md             human-facing walkthrough of G001-G008  (never loaded)
-    ├── customers.yaml        8 customers, one per golden case
+├── golden/
+│   ├── README.md             human-facing walkthrough of G001-G008  (never loaded)
+│   ├── customers.yaml        8 customers, one per golden case
+│   ├── opportunities.yaml
+│   ├── interactions.yaml
+│   ├── followup_tasks.yaml
+│   ├── emails.yaml
+│   └── calendar_events.yaml
+└── background/               16 ordinary CRM customers (never eval cases)
+    ├── customers.yaml
     ├── opportunities.yaml
     ├── interactions.yaml
     ├── followup_tasks.yaml
@@ -23,7 +29,7 @@ data/
 src/eoa/
 ├── constants.py              closed enumerations + id formats. no environment facts.
 ├── models.py                 the schema — single source of truth
-├── loader.py                 YAML -> models, with the runtime/expectation boundary
+├── loader.py                 golden + background YAML -> one runtime Dataset
 ├── derive.py                 pure predicates (overdue, unanswered, open)
 └── validate.py               cross-entity business rules
 
@@ -31,13 +37,26 @@ tests/
 ├── fixtures/golden_cases.yaml    G001-G008 expected behaviour  (never loaded by src/)
 ├── test_schema.py                field-level constraints
 ├── test_business_rules.py        cross-entity rules + derived logic + isolation
+├── test_background_data.py       0C-1 source partition + diversity requirements
 └── test_scenario_coverage.py     the runtime facts G001-G008 depend on
 ```
 
+Runtime source counts:
+
+| Entity | Golden | Background | Runtime total |
+|---|---:|---:|---:|
+| Customer | 8 | 16 | 24 |
+| Opportunity | 5 | 12 | 17 |
+| Interaction | 13 | 16 | 29 |
+| FollowUpTask | 7 | 16 | 23 |
+| Email | 16 | 20 | 36 |
+| CalendarEvent | 9 | 7 | 16 |
+| **All records** | **58** | **87** | **145** |
+
 ## Two boundaries that matter
 
-**Facts vs. answers.** `data/golden/` holds only what is true in the simulated
-business. Anything resembling a correct answer — `should_prioritize`,
+**Facts vs. answers.** `data/golden/` and `data/background/` hold only what is
+true in the simulated business. Anything resembling a correct answer — `should_prioritize`,
 `expected_signals`, `must_not` — lives in `tests/fixtures/golden_cases.yaml`,
 which no module under `src/eoa/` can reach. Both halves of that rule are
 asserted by tests.
@@ -52,8 +71,8 @@ reference time and every such conclusion moves with it.
 ```bash
 pip install -e ".[dev]"     # or: pip install pydantic pyyaml pytest
 
-python -m eoa               # validate the golden data, exit 1 on any violation
-python -m pytest -v         # schema + business rules + scenario coverage
+python -m eoa               # validate the complete runtime data, exit 1 on any violation
+python -m pytest -v         # schema + business rules + background + scenario coverage
 ```
 
 ```python
@@ -63,8 +82,9 @@ meta, dataset = load_environment()
 assert validate_environment(meta, dataset) == []
 ```
 
-## Editing golden data
+## Editing runtime data
 
-Read `data/golden/README.md` first — it explains what each of the eight
-customers represents and which facts are load-bearing. Quote every timestamp,
-and re-run both commands above afterwards.
+Read `data/golden/README.md` before changing the eight reviewed customers; it
+explains which facts are load-bearing. Background records belong in the six
+matching files under `data/background/`. Quote every timestamp and re-run both
+commands above afterwards.

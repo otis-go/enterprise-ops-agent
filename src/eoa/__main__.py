@@ -1,4 +1,4 @@
-"""``python -m eoa`` runs the golden-data validator."""
+"""``python -m eoa`` validates the complete runtime dataset."""
 
 from .validate import main
 

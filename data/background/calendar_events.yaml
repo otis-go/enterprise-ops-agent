@@ -1,0 +1,79 @@
+# Ordinary completed meetings. Golden EVT-005 remains the runtime dataset's
+# only scheduled event, preserving the reviewed G004 fact.
+
+- event_id: "EVT-101"
+  title: "嘉禾餐饮门店运营指标梳理"
+  customer_id: "CUST-102"
+  opportunity_id: "OPP-102"
+  start_at: "2026-08-04T14:00:00+08:00"
+  end_at: "2026-08-04T15:00:00+08:00"
+  location: "线上会议"
+  attendees_internal: ["rep_chen_hao"]
+  attendees_customer: ["蒋琳", "方明"]
+  status: "completed"
+
+- event_id: "EVT-102"
+  title: "东桥汽车质量追溯平台演示"
+  customer_id: "CUST-103"
+  opportunity_id: "OPP-103"
+  start_at: "2026-08-06T15:00:00+08:00"
+  end_at: "2026-08-06T16:30:00+08:00"
+  location: "常州市东桥汽车总部会议室"
+  attendees_internal: ["rep_li_wei", "rep_chen_hao"]
+  attendees_customer: ["高磊", "严松"]
+  status: "completed"
+
+- event_id: "EVT-103"
+  title: "启程教育排课运营平台启动会"
+  customer_id: "CUST-106"
+  opportunity_id: "OPP-106"
+  start_at: "2026-07-27T10:00:00+08:00"
+  end_at: "2026-07-27T11:15:00+08:00"
+  location: "线上会议"
+  attendees_internal: ["rep_li_wei"]
+  attendees_customer: ["许文静", "冯浩"]
+  status: "completed"
+
+- event_id: "EVT-104"
+  title: "泰岳工业工单移动化上线准备会"
+  customer_id: "CUST-109"
+  opportunity_id: "OPP-109"
+  start_at: "2026-08-05T14:00:00+08:00"
+  end_at: "2026-08-05T15:00:00+08:00"
+  location: "线上会议"
+  attendees_internal: ["rep_zhang_min"]
+  attendees_customer: ["罗强", "魏东"]
+  status: "completed"
+
+- event_id: "EVT-105"
+  title: "悦行文旅会员运营分析演示"
+  customer_id: "CUST-111"
+  opportunity_id: "OPP-111"
+  start_at: "2026-08-04T13:30:00+08:00"
+  end_at: "2026-08-04T14:50:00+08:00"
+  location: "南京市悦行文旅总部会议室"
+  attendees_internal: ["rep_zhang_min", "rep_chen_hao"]
+  attendees_customer: ["叶青", "龚雪"]
+  status: "completed"
+
+- event_id: "EVT-106"
+  title: "盛景商业经营分析扩容沟通"
+  customer_id: "CUST-115"
+  opportunity_id: "OPP-115"
+  start_at: "2026-08-07T15:00:00+08:00"
+  end_at: "2026-08-07T15:50:00+08:00"
+  location: "线上会议"
+  attendees_internal: ["rep_chen_hao"]
+  attendees_customer: ["费宁", "章凯"]
+  status: "completed"
+
+- event_id: "EVT-107"
+  title: "科朗仪器月度服务回访"
+  customer_id: "CUST-112"
+  opportunity_id: null
+  start_at: "2026-08-06T09:30:00+08:00"
+  end_at: "2026-08-06T09:55:00+08:00"
+  location: "线上会议"
+  attendees_internal: ["rep_li_wei"]
+  attendees_customer: ["胡斌"]
+  status: "completed"

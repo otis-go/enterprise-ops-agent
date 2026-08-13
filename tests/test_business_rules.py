@@ -2,7 +2,7 @@
 
 Three groups:
 
-1. the real golden data satisfies every rule;
+1. the complete runtime data satisfies every rule;
 2. each rule actually fires when the data is deliberately broken (a validator
    that never says no is worthless);
 3. the derived pure functions behave as specified, on synthetic inputs.
@@ -30,7 +30,7 @@ from eoa.derive import (
     unanswered_inbound_emails,
     upcoming_scheduled_events,
 )
-from eoa.loader import GOLDEN_FILES
+from eoa.loader import BUSINESS_FILES, RUNTIME_DIRNAMES
 from eoa.models import Dataset, Email, FollowUpTask, Meta, Opportunity
 from eoa.validate import validate_environment
 
@@ -56,7 +56,7 @@ def swap(records: list, index: int, **changes) -> list:
 # --------------------------------------------------------------------------- #
 
 
-def test_golden_data_has_no_violations(meta: Meta, dataset: Dataset):
+def test_runtime_data_has_no_violations(meta: Meta, dataset: Dataset):
     violations = validate_environment(meta, dataset)
     assert violations == [], "\n".join(str(v) for v in violations)
 
@@ -65,9 +65,11 @@ def test_current_user_is_a_known_rep(meta: Meta):
     assert meta.current_user in meta.sales_reps
 
 
-def test_every_customer_is_owned_by_the_current_user(meta: Meta, dataset: Dataset):
+def test_every_golden_customer_is_owned_by_the_current_user(meta: Meta, dataset: Dataset):
     """Keeps every golden case in scope regardless of how candidates are filtered."""
     for customer in dataset.customers:
+        if customer.customer_id not in {f"CUST-00{n}" for n in range(1, 9)}:
+            continue
         assert customer.owner_rep == meta.current_user
 
 
@@ -375,12 +377,12 @@ def test_outbound_mail_is_never_unanswered_inbound():
     assert is_unanswered_inbound(outbound, [outbound]) is False
 
 
-def test_unanswered_set_on_the_golden_data(dataset: Dataset):
+def test_unanswered_set_on_the_runtime_data(dataset: Dataset):
     found = {email.email_id for email in unanswered_inbound_emails(dataset.emails)}
     assert found == {"EMAIL-004", "EMAIL-014"}
 
 
-def test_both_unanswered_definitions_agree_on_the_golden_data(dataset: Dataset):
+def test_both_unanswered_definitions_agree_on_the_runtime_data(dataset: Dataset):
     for email in dataset.emails:
         assert is_unanswered_inbound(email, dataset.emails) == is_unanswered_inbound_strict(
             email, dataset.emails
@@ -410,9 +412,17 @@ def test_last_interaction_is_none_for_an_unknown_customer(dataset: Dataset):
     assert last_interaction_at(dataset.interactions, "CUST-404") is None
 
 
-def test_no_task_in_the_golden_data_is_overdue(meta: Meta, dataset: Dataset):
-    """G001's task is due *today*; nothing in this dataset has slipped past it."""
-    assert overdue_tasks(dataset.followup_tasks, meta.reference_date) == []
+def test_no_golden_task_is_overdue(meta: Meta, dataset: Dataset, data_dir: Path):
+    """G001's task is due today; the reviewed Golden subset has no overdue task."""
+    records = yaml.safe_load(
+        (data_dir / "golden" / "followup_tasks.yaml").read_text(encoding="utf-8")
+    )
+    golden_task_ids = {record["task_id"] for record in records}
+    golden_tasks = [
+        task for task in dataset.followup_tasks if task.task_id in golden_task_ids
+    ]
+    assert {task.task_id for task in golden_tasks} == golden_task_ids
+    assert overdue_tasks(golden_tasks, meta.reference_date) == []
 
 
 def test_upcoming_events_respects_the_window(meta: Meta, dataset: Dataset):
@@ -470,25 +480,27 @@ def test_runtime_code_cannot_reach_test_expectations(src_dir: Path):
                 assert "golden_case" not in node.attr, path.name
 
 
-def test_loader_only_knows_the_six_business_files():
-    assert {filename for filename, _ in GOLDEN_FILES.values()} == {
+def test_loader_only_knows_runtime_directories_and_the_six_business_files():
+    assert RUNTIME_DIRNAMES == ("golden", "background")
+    assert {filename for filename, _ in BUSINESS_FILES.values()} == {
         "customers.yaml", "opportunities.yaml", "interactions.yaml",
         "followup_tasks.yaml", "emails.yaml", "calendar_events.yaml",
     }
 
 
-def test_golden_yaml_contains_no_expected_answers(data_dir: Path):
-    for path in sorted((data_dir / "golden").glob("*.yaml")):
-        records = yaml.safe_load(path.read_text(encoding="utf-8"))
-        for record in records:
-            for key in EXPECTATION_KEYS:
-                assert key not in record, f"{path.name} leaks {key!r}"
+def test_runtime_yaml_contains_no_expected_answers(data_dir: Path):
+    for dirname in RUNTIME_DIRNAMES:
+        for path in sorted((data_dir / dirname).glob("*.yaml")):
+            records = yaml.safe_load(path.read_text(encoding="utf-8"))
+            for record in records:
+                for key in EXPECTATION_KEYS:
+                    assert key not in record, f"{dirname}/{path.name} leaks {key!r}"
 
 
 def test_golden_readme_is_not_loaded(dataset: Dataset, data_dir: Path):
     """The human-facing README lives next to the data but is never parsed."""
     assert (data_dir / "golden" / "README.md").is_file()
-    assert len(dataset.customers) == 8
+    assert len(dataset.customers) == 24
 
 
 def test_golden_cases_fixture_lives_outside_the_data_directory(

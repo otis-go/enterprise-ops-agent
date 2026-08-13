@@ -1,6 +1,6 @@
 """Derived business predicates.
 
-Nothing here is stored in the golden data. Every value below is computed from
+Nothing here is stored in runtime data. Every value below is computed from
 business facts plus the reference time, so it can never go stale in the way a
 persisted ``is_overdue`` or ``is_read`` flag would.
 
@@ -80,7 +80,7 @@ def is_unanswered_inbound(email: Email, emails: Iterable[Email]) -> bool:
 def is_unanswered_inbound_strict(email: Email, emails: Iterable[Email]) -> bool:
     """Stricter variant scoped to direct replies via ``in_reply_to``.
 
-    Kept so the golden data can be asserted unambiguous: both definitions must
+    Kept so the runtime data can be asserted unambiguous: both definitions must
     agree on every record, otherwise an evaluation question would have two
     defensible answers.
     """

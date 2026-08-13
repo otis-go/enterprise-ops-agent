@@ -3,10 +3,9 @@
 Two hard boundaries are enforced here:
 
 1. **Runtime never reads test expectations.** Only ``data/meta.yaml`` and the
-   six files in ``data/golden/`` are loadable. ``tests/fixtures/golden_cases.yaml``
-   is unreachable from this module by construction (see ``GOLDEN_FILES`` and
-   :func:`_read_yaml`), and ``data/golden/README.md`` is not YAML so it is never
-   loaded either.
+   six whitelisted business files under ``data/golden/`` and
+   ``data/background/`` are loadable. The evaluation fixture is unreachable
+   from this module by construction, and adjacent documentation is never read.
 2. **YAML timestamps stay strings.** PyYAML's implicit timestamp resolver
    converts ``2026-08-11T09:00:00+08:00`` into a *naive UTC* ``datetime``,
    silently destroying the UTC offset. The resolver is stripped below so every
@@ -36,11 +35,11 @@ PROJECT_ROOT = PACKAGE_ROOT.parent.parent
 DEFAULT_DATA_DIR = PROJECT_ROOT / "data"
 
 META_FILENAME = "meta.yaml"
-GOLDEN_DIRNAME = "golden"
+RUNTIME_DIRNAMES = ("golden", "background")
 
 # The complete, closed list of business-fact files. Anything not named here is
 # not part of the runtime environment.
-GOLDEN_FILES: dict[str, tuple[str, type]] = {
+BUSINESS_FILES: dict[str, tuple[str, type]] = {
     "customers": ("customers.yaml", Customer),
     "opportunities": ("opportunities.yaml", Opportunity),
     "interactions": ("interactions.yaml", Interaction),
@@ -48,6 +47,10 @@ GOLDEN_FILES: dict[str, tuple[str, type]] = {
     "emails": ("emails.yaml", Email),
     "calendar_events": ("calendar_events.yaml", CalendarEvent),
 }
+
+# Backwards-compatible public name from Phase 0B. It still describes the same
+# closed six-file whitelist; only the source directories have expanded.
+GOLDEN_FILES = BUSINESS_FILES
 
 
 class _NoTimestampLoader(yaml.SafeLoader):
@@ -80,19 +83,25 @@ def load_meta(data_dir: Path | str = DEFAULT_DATA_DIR) -> Meta:
 
 
 def load_dataset(data_dir: Path | str = DEFAULT_DATA_DIR) -> Dataset:
-    """Load the six golden business-fact files into a :class:`Dataset`."""
-    golden_dir = Path(data_dir) / GOLDEN_DIRNAME
-    collections: dict[str, list[Any]] = {}
-    for field_name, (filename, model) in GOLDEN_FILES.items():
-        payload = _read_yaml(golden_dir / filename)
-        if payload is None:
-            payload = []
-        if not isinstance(payload, list):
-            raise ValueError(f"{filename} must contain a list of records")
-        collections[field_name] = [model.model_validate(item) for item in payload]
+    """Load Golden and Background business facts into one runtime dataset."""
+    root = Path(data_dir)
+    collections: dict[str, list[Any]] = {
+        field_name: [] for field_name in BUSINESS_FILES
+    }
+    for dirname in RUNTIME_DIRNAMES:
+        source_dir = root / dirname
+        for field_name, (filename, model) in BUSINESS_FILES.items():
+            payload = _read_yaml(source_dir / filename)
+            if payload is None:
+                payload = []
+            if not isinstance(payload, list):
+                raise ValueError(f"{source_dir / filename} must contain a list of records")
+            collections[field_name].extend(
+                model.model_validate(item) for item in payload
+            )
     return Dataset.model_validate(collections)
 
 
 def load_environment(data_dir: Path | str = DEFAULT_DATA_DIR) -> tuple[Meta, Dataset]:
-    """Load environment facts and golden data together."""
+    """Load environment facts and the complete runtime dataset together."""
     return load_meta(data_dir), load_dataset(data_dir)

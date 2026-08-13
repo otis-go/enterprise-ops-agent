@@ -1,4 +1,4 @@
-"""Cross-entity business rules for the golden data.
+"""Cross-entity business rules for the complete runtime dataset.
 
 Field-level constraints are enforced by :mod:`eoa.models` at parse time. This
 module carries everything that needs more than one record, or needs the

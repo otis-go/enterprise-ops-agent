@@ -3,7 +3,8 @@
 这份文档是给**开发者**看的，用于人工理解 8 个 Golden Customers 分别在表达什么业务情形。
 
 > 它不是运行时数据，也不应被 Agent Runtime 读取。
-> `src/eoa/loader.py` 只加载 `data/meta.yaml` 与本目录下的 6 个 `.yaml` 文件，README.md 不在白名单内。
+> `src/eoa/loader.py` 加载 `data/meta.yaml`，并合并 `data/golden/` 与
+> `data/background/` 中白名单内的 6 类 `.yaml` 文件；README.md 不在白名单内。
 
 ---
 
@@ -22,7 +23,7 @@
 
 ---
 
-## 数据总量
+## Golden 数据量（不含 Background）
 
 | 实体 | 条数 |
 |---|---|
@@ -33,6 +34,9 @@
 | Email | 16 |
 | CalendarEvent | 9 |
 | **合计** | **58** |
+
+Background 另有 87 条记录；Runtime 合并后共 145 条记录，其中 Customer
+为 Golden 8 + Background 16 = 24。完整分项见项目根目录 `README.md`。
 
 CUST-006 / CUST-007 / CUST-008 没有 Opportunity，CUST-006 / CUST-007 没有 FollowUpTask —— 这些"缺失"本身就是场景的一部分，不是数据不全。
 
@@ -199,7 +203,7 @@ Prospect。`OPP-005 仓配调度优化`，**Lost**，`actual_close_date = 2026-0
 
 1. **时间戳必须加引号。** PyYAML 的隐式 timestamp 解析器会把 `2026-08-11T09:00:00+08:00` 转成**丢掉时区的 naive UTC** datetime。`loader.py` 已经移除了该解析器，但保持加引号仍是最直观的防线。
 2. **改一处会牵动多处。** 比如把 `INT-002` 的日期从 8 月 3 日往后挪，G001 的"8 天未联系"就不成立，`test_scenario_coverage.py::test_g001_runtime_facts` 会失败 —— 这是预期行为，不是测试太脆。
-3. **不要往这些文件里写答案。** `should_prioritize` / `expected_signals` / `must_not` 只允许出现在 `tests/fixtures/golden_cases.yaml`，`test_business_rules.py::test_golden_yaml_contains_no_expected_answers` 会强制这一点。
+3. **不要往这些文件里写答案。** `should_prioritize` / `expected_signals` / `must_not` 只允许出现在 `tests/fixtures/golden_cases.yaml`，`test_business_rules.py::test_runtime_yaml_contains_no_expected_answers` 会强制这一点。
 4. **改完跑校验：**
    ```bash
    python -m eoa      # 跨实体规则校验

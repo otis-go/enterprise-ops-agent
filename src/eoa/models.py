@@ -1,11 +1,11 @@
 """Schema for the synthetic business environment — the single source of truth.
 
 Six business entities plus :class:`Meta` (environment facts) and
-:class:`Dataset` (the loaded golden data as a whole).
+:class:`Dataset` (the complete loaded runtime data).
 
 Every model uses ``extra="forbid"`` so a typo in hand-written YAML fails loudly
-instead of being silently dropped, and ``frozen=True`` because the golden data
-is a read-only environment.
+instead of being silently dropped, and ``frozen=True`` because runtime facts
+form a read-only environment.
 
 Field-level constraints (types, enums, id formats, nullability) live here.
 Cross-entity and cross-record rules live in :mod:`eoa.validate`.
@@ -157,7 +157,7 @@ class CalendarEvent(_Base):
 
 
 class Dataset(_Base):
-    """All golden business facts, already parsed and field-validated."""
+    """All runtime business facts, already parsed and field-validated."""
 
     customers: list[Customer]
     opportunities: list[Opportunity]

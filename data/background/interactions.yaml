@@ -1,0 +1,161 @@
+# One ordinary logged touchpoint per background customer.
+
+- interaction_id: "INT-101"
+  customer_id: "CUST-101"
+  opportunity_id: "OPP-101"
+  channel: "call"
+  occurred_at: "2026-07-29T15:00:00+08:00"
+  duration_minutes: 25
+  participants_internal: ["rep_zhang_min"]
+  participants_customer: ["林晓峰"]
+  summary: "首次电话了解生产报表现状。客户正在统一三个车间的日报模板，同意先提供一份脱敏样表供需求判断。"
+
+- interaction_id: "INT-102"
+  customer_id: "CUST-102"
+  opportunity_id: "OPP-102"
+  channel: "meeting"
+  occurred_at: "2026-08-04T14:00:00+08:00"
+  duration_minutes: 60
+  participants_internal: ["rep_chen_hao"]
+  participants_customer: ["蒋琳", "方明"]
+  summary: "线上梳理门店运营指标。双方确认首期围绕营业额、客单价和损耗率搭建区域看板，客户将补充数据口径。"
+
+- interaction_id: "INT-103"
+  customer_id: "CUST-103"
+  opportunity_id: "OPP-103"
+  channel: "meeting"
+  occurred_at: "2026-08-06T15:00:00+08:00"
+  duration_minutes: 90
+  participants_internal: ["rep_li_wei", "rep_chen_hao"]
+  participants_customer: ["高磊", "严松"]
+  summary: "完成质量追溯平台演示。客户认可批次追溯流程，希望下一版演示补充供应商来料检验数据的查询方式。"
+
+- interaction_id: "INT-104"
+  customer_id: "CUST-104"
+  opportunity_id: "OPP-104"
+  channel: "call"
+  occurred_at: "2026-08-07T14:30:00+08:00"
+  duration_minutes: 35
+  participants_internal: ["rep_zhang_min"]
+  participants_customer: ["唐悦"]
+  summary: "电话确认报价范围与实施边界。客户接受分阶段上线思路，双方约定由我方整理正式方案供实验室负责人内部评审。"
+
+- interaction_id: "INT-105"
+  customer_id: "CUST-105"
+  opportunity_id: null
+  channel: "call"
+  occurred_at: "2026-08-05T10:00:00+08:00"
+  duration_minutes: 20
+  participants_internal: ["rep_chen_hao"]
+  participants_customer: ["马会"]
+  summary: "月度服务回访。采购目录同步运行正常，客户反馈上月新增的审批模板已经投入使用，目前没有遗留问题。"
+
+- interaction_id: "INT-106"
+  customer_id: "CUST-106"
+  opportunity_id: "OPP-106"
+  channel: "meeting"
+  occurred_at: "2026-07-27T10:00:00+08:00"
+  duration_minutes: 75
+  participants_internal: ["rep_li_wei"]
+  participants_customer: ["许文静", "冯浩"]
+  summary: "项目启动会完成。双方确认先上线排课与教室资源模块，客户项目组将在本周内准备基础课程数据。"
+
+- interaction_id: "INT-107"
+  customer_id: "CUST-107"
+  opportunity_id: "OPP-107"
+  channel: "call"
+  occurred_at: "2026-08-03T15:30:00+08:00"
+  duration_minutes: 20
+  participants_internal: ["rep_chen_hao"]
+  participants_customer: ["丁宇"]
+  summary: "客户通知本轮仍沿用现有供应商以减少系统切换成本。我方确认关闭商机，并保留本次需求调研材料。"
+
+- interaction_id: "INT-108"
+  customer_id: "CUST-108"
+  opportunity_id: "OPP-108"
+  channel: "call"
+  occurred_at: "2026-08-01T10:00:00+08:00"
+  duration_minutes: 25
+  participants_internal: ["rep_li_wei"]
+  participants_customer: ["沈佳"]
+  summary: "初步了解家装项目进度汇总需求。客户目前使用共享表格管理节点，希望先看标准项目看板的产品资料。"
+
+- interaction_id: "INT-109"
+  customer_id: "CUST-109"
+  opportunity_id: "OPP-109"
+  channel: "meeting"
+  occurred_at: "2026-08-05T14:00:00+08:00"
+  duration_minutes: 60
+  participants_internal: ["rep_zhang_min"]
+  participants_customer: ["罗强", "魏东"]
+  summary: "工单移动化上线准备会。确认首批覆盖十二名现场工程师，账号名单与设备信息已由客户交付。"
+
+- interaction_id: "INT-110"
+  customer_id: "CUST-110"
+  opportunity_id: "OPP-110"
+  channel: "call"
+  occurred_at: "2026-08-05T11:00:00+08:00"
+  duration_minutes: 30
+  participants_internal: ["rep_chen_hao"]
+  participants_customer: ["孟杰"]
+  summary: "沟通基地数据采集范围。客户优先考虑温湿度与灌溉记录，下一步将确认两处试点基地的网络条件。"
+
+- interaction_id: "INT-111"
+  customer_id: "CUST-111"
+  opportunity_id: "OPP-111"
+  channel: "meeting"
+  occurred_at: "2026-08-04T13:30:00+08:00"
+  duration_minutes: 80
+  participants_internal: ["rep_zhang_min", "rep_chen_hao"]
+  participants_customer: ["叶青", "龚雪"]
+  summary: "演示会员分群与活动分析功能。客户确认基础场景符合预期，希望后续使用一份脱敏交易数据做效果验证。"
+
+- interaction_id: "INT-112"
+  customer_id: "CUST-112"
+  opportunity_id: null
+  channel: "call"
+  occurred_at: "2026-08-06T09:30:00+08:00"
+  duration_minutes: 25
+  participants_internal: ["rep_li_wei"]
+  participants_customer: ["胡斌"]
+  summary: "例行服务回访。售后工单响应时间保持稳定，客户提出下月培训时再复习一次批量派单操作。"
+
+- interaction_id: "INT-113"
+  customer_id: "CUST-113"
+  opportunity_id: null
+  channel: "call"
+  occurred_at: "2026-05-29T16:00:00+08:00"
+  duration_minutes: 20
+  participants_internal: ["rep_zhang_min"]
+  participants_customer: ["宋岚"]
+  summary: "合同到期前完成交接确认。客户已将历史报表导出归档，双方确认按计划结束服务且无未结事项。"
+
+- interaction_id: "INT-114"
+  customer_id: "CUST-114"
+  opportunity_id: "OPP-114"
+  channel: "call"
+  occurred_at: "2026-08-08T11:00:00+08:00"
+  duration_minutes: 40
+  participants_internal: ["rep_chen_hao"]
+  participants_customer: ["邹晨"]
+  summary: "逐项核对供应商协同方案范围。客户要求报价中分别列明接口实施和用户培训费用，其他范围保持不变。"
+
+- interaction_id: "INT-115"
+  customer_id: "CUST-115"
+  opportunity_id: "OPP-115"
+  channel: "meeting"
+  occurred_at: "2026-08-07T15:00:00+08:00"
+  duration_minutes: 50
+  participants_internal: ["rep_chen_hao"]
+  participants_customer: ["费宁", "章凯"]
+  summary: "讨论经营分析扩容需求。客户希望新增三个区域的数据接入，双方正在核实新增数据源的接口方式。"
+
+- interaction_id: "INT-116"
+  customer_id: "CUST-116"
+  opportunity_id: null
+  channel: "call"
+  occurred_at: "2026-08-06T10:30:00+08:00"
+  duration_minutes: 25
+  participants_internal: ["rep_li_wei"]
+  participants_customer: ["孔玮"]
+  summary: "首次沟通环保工程项目台账需求。客户仍在汇总内部使用部门，暂未形成正式采购计划。"

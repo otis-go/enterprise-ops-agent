@@ -7,7 +7,7 @@ venv/
 build/
 dist/
 
-# Runtime artifacts are always rebuildable from data/golden/ — never commit them.
+# Runtime artifacts are rebuildable from data/golden/ + data/background/ — never commit them.
 data/runtime/*
 !data/runtime/.gitkeep
 
