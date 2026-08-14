@@ -2,8 +2,8 @@
 
 Synthetic business environment for an enterprise sales-ops agent.
 
-**Current phase: 0C-1 — Golden Data plus 16 Background Customers.**
-No agent, LLM, tool calling, RAG, embedding, memory, web UI or SQLite.
+**Current phase: 0D — final data validation complete.**
+No agent, LLM, CRM tool, natural-language query, RAG, embedding, memory or web UI.
 
 ## What exists
 
@@ -18,26 +18,37 @@ data/
 │   ├── followup_tasks.yaml
 │   ├── emails.yaml
 │   └── calendar_events.yaml
-└── background/               16 ordinary CRM customers (never eval cases)
-    ├── customers.yaml
-    ├── opportunities.yaml
-    ├── interactions.yaml
-    ├── followup_tasks.yaml
-    ├── emails.yaml
-    └── calendar_events.yaml
+├── background/               16 ordinary CRM customers (never eval cases)
+│   ├── customers.yaml
+│   ├── opportunities.yaml
+│   ├── interactions.yaml
+│   ├── followup_tasks.yaml
+│   ├── emails.yaml
+│   └── calendar_events.yaml
+└── fixtures/
+    └── crm_timeout.yaml      offline CRM timeout fixture (never runtime data)
 
 src/eoa/
 ├── constants.py              closed enumerations + id formats. no environment facts.
 ├── models.py                 the schema — single source of truth
 ├── loader.py                 golden + background YAML -> one runtime Dataset
 ├── derive.py                 pure predicates (overdue, unanswered, open)
-└── validate.py               cross-entity business rules
+├── validate.py               cross-entity business rules
+└── build_database.py         validated Dataset -> generated SQLite artifact
+
+storage/
+└── enterprise_ops.db         generated runtime artifact (Git-ignored)
+
+scripts/
+└── validate_data.py          Phase 0 offline acceptance validation
 
 tests/
 ├── fixtures/golden_cases.yaml    G001-G008 expected behaviour  (never loaded by src/)
 ├── test_schema.py                field-level constraints
 ├── test_business_rules.py        cross-entity rules + derived logic + isolation
 ├── test_background_data.py       0C-1 source partition + diversity requirements
+├── test_database_builder.py      0C-2 schema, rebuild, transaction + isolation
+├── test_final_data_validation.py 0D ground truth, negative rules + timeout isolation
 └── test_scenario_coverage.py     the runtime facts G001-G008 depend on
 ```
 
@@ -58,8 +69,9 @@ Runtime source counts:
 **Facts vs. answers.** `data/golden/` and `data/background/` hold only what is
 true in the simulated business. Anything resembling a correct answer — `should_prioritize`,
 `expected_signals`, `must_not` — lives in `tests/fixtures/golden_cases.yaml`,
-which no module under `src/eoa/` can reach. Both halves of that rule are
-asserted by tests.
+which no module under `src/eoa/` can reach. The offline Phase 0D validator may
+read it to verify ground truth; runtime code may not. Both halves of that rule
+are asserted by tests.
 
 **Facts vs. derived state.** Nothing that depends on "now" is stored. There is
 no `is_overdue`, no `is_read`, no `probability`, no sentiment label. Those are
@@ -72,6 +84,8 @@ reference time and every such conclusion moves with it.
 pip install -e ".[dev]"     # or: pip install pydantic pyyaml pytest
 
 python -m eoa               # validate the complete runtime data, exit 1 on any violation
+python -m eoa.build_database # rebuild storage/enterprise_ops.db from YAML
+python scripts/validate_data.py # Phase 0 final data + ground-truth acceptance
 python -m pytest -v         # schema + business rules + background + scenario coverage
 ```
 
@@ -86,5 +100,8 @@ assert validate_environment(meta, dataset) == []
 
 Read `data/golden/README.md` before changing the eight reviewed customers; it
 explains which facts are load-bearing. Background records belong in the six
-matching files under `data/background/`. Quote every timestamp and re-run both
-commands above afterwards.
+matching files under `data/background/`. Quote every timestamp, then re-run the
+validation, database build, and test commands.
+
+`storage/enterprise_ops.db` is generated and ignored by Git. Never edit it
+directly: rebuild it from YAML with `python -m eoa.build_database`.

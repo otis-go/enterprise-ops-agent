@@ -1,0 +1,4 @@
+fixture_id: "CRM-TIMEOUT-001"
+system: "crm"
+operation: "query"
+failure: "timeout"

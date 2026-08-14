@@ -11,6 +11,10 @@ dist/
 data/runtime/*
 !data/runtime/.gitkeep
 
+# SQLite is a generated runtime artifact; YAML remains the source of truth.
+storage/*.db
+storage/*.db-*
+
 # Per-developer Claude Code permission grants — machine-specific, churns every
 # session. A shared .claude/settings.json would still be tracked.
 .claude/settings.local.json

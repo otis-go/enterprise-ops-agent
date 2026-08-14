@@ -1,7 +1,7 @@
 """Enterprise Ops Agent — synthetic business environment.
 
-Phase 0C-1 scope: schema, runtime YAML loading, derived predicates, validation.
-No agent, LLM, tool calling, RAG, embedding, memory, web UI or SQLite.
+Phase 0 scope: schema, runtime YAML loading, validation, SQLite building.
+No agent, LLM, CRM tool, natural-language query, RAG, embedding, memory or web UI.
 """
 
 from .constants import (

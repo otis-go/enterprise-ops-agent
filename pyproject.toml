@@ -1,7 +1,7 @@
 [project]
 name = "enterprise-ops-agent"
 version = "0.1.0"
-description = "Synthetic runtime dataset for an enterprise sales-ops agent (Phase 0C-1)"
+description = "Validated synthetic runtime dataset for an enterprise sales-ops agent (Phase 0D)"
 requires-python = ">=3.11"
 dependencies = [
     "pydantic>=2.6",
@@ -20,5 +20,5 @@ packages = ["src/eoa"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-pythonpath = ["src"]
+pythonpath = ["src", "."]
 addopts = "-ra"
