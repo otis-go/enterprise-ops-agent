@@ -310,7 +310,7 @@ def main() -> int:
 
     print("Phase 0 data validation passed")
     print(f"{result.record_count} runtime records")
-    print("G001-G008 ground truth verified")
+    print("G001-G008 runtime scenario facts verified")
     print("CRM timeout fixture isolated")
     return 0
 

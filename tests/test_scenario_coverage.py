@@ -1,12 +1,9 @@
 """Scenario coverage for G001-G008.
 
-This file is the bridge between the two halves of the environment: it reads
-expectations from ``tests/fixtures/golden_cases.yaml`` and asserts that the
-*runtime facts* those expectations depend on really exist in
-``data/golden/*.yaml``.
-
-It asserts structure only. Nothing here says what an agent should reply — only
-that the data needed to reach a defensible answer is present and unambiguous.
+This file is the bridge between the two halves of the environment: it pins the
+reviewed evaluation contract in ``tests/fixtures/golden_cases.yaml`` and
+asserts that the *runtime facts* behind it exist in ``data/golden/*.yaml``.
+It does not prescribe free-form agent response text.
 """
 
 from __future__ import annotations
@@ -28,6 +25,26 @@ from eoa.derive import (
 from eoa.models import Dataset, Meta
 
 CASE_IDS = [f"G00{n}" for n in range(1, 9)]
+SHOULD_PRIORITIZE_CONTRACT = {
+    "G001": True,
+    "G002": True,
+    "G003": True,
+    "G004": True,
+    "G005": False,
+    "G006": True,
+    "G007": True,
+    "G008": False,
+}
+ANCHOR_CONTRACT = {
+    "G001": ("CUST-001", "OPP-001"),
+    "G002": ("CUST-002", "OPP-002"),
+    "G003": ("CUST-003", "OPP-003"),
+    "G004": ("CUST-004", "OPP-004"),
+    "G005": ("CUST-005", "OPP-005"),
+    "G006": ("CUST-006", None),
+    "G007": ("CUST-007", None),
+    "G008": ("CUST-008", None),
+}
 
 # Closed vocabularies. A typo in the fixture must fail, not be ignored.
 KNOWN_SIGNALS = {
@@ -54,10 +71,24 @@ def test_all_eight_cases_are_present(cases_by_id: dict[str, Any]):
     assert sorted(cases_by_id) == CASE_IDS
 
 
-def test_each_case_anchors_a_distinct_customer(cases_by_id: dict[str, Any]):
-    anchors = [case["anchor_customer"] for case in cases_by_id.values()]
-    assert anchors == [f"CUST-00{n}" for n in range(1, 9)]
-    assert len(set(anchors)) == 8
+@pytest.mark.parametrize("case_id", CASE_IDS)
+def test_each_case_matches_should_prioritize_contract(
+    case_id: str, cases_by_id: dict[str, Any]
+):
+    assert (
+        cases_by_id[case_id]["should_prioritize"]
+        is SHOULD_PRIORITIZE_CONTRACT[case_id]
+    )
+
+
+@pytest.mark.parametrize("case_id", CASE_IDS)
+def test_each_case_matches_anchor_contract(
+    case_id: str, cases_by_id: dict[str, Any]
+):
+    case = cases_by_id[case_id]
+    assert (case["anchor_customer"], case["anchor_opportunity"]) == ANCHOR_CONTRACT[
+        case_id
+    ]
 
 
 @pytest.mark.parametrize("case_id", CASE_IDS)

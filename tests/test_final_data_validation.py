@@ -256,7 +256,7 @@ def test_validate_data_cli_reports_success(capsys: pytest.CaptureFixture[str]):
     assert captured.out.splitlines() == [
         "Phase 0 data validation passed",
         "145 runtime records",
-        "G001-G008 ground truth verified",
+        "G001-G008 runtime scenario facts verified",
         "CRM timeout fixture isolated",
     ]
     assert captured.err == ""
